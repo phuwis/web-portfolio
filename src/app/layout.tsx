@@ -1,5 +1,13 @@
 // components/layout.tsx
-import { Button, Row } from "antd";
+import {
+  MailOutlined,
+  FacebookOutlined,
+  InstagramOutlined,
+} from "@ant-design/icons";
+import { Button, Col, Image, Layout, Row } from "antd";
+import { Content, Footer, Header } from "antd/es/layout/layout";
+import Title from "antd/es/typography/Title";
+import Typography from "antd/es/typography/Typography";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
@@ -14,25 +22,94 @@ interface LayoutProps {
   children: ReactNode;
 }
 
+// this all text
+const menu = "Menu";
+const companyName = "Utotech co., ltd";
+const copyright = " © Copyright Utotech Co., Ltd.. All Rights Reserved";
+
 const RootLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <>
-      <Row>
-        <ul>
-          <li>
-            <Link href="/"> Home</Link>
-          </li>
-          <li>
-            <Link href="about"> About</Link>
-          </li>
-        </ul>
-      </Row>
-      <div>
-        {/* Your layout content */}
-        {children}
-      </div>
-    </>
+    <Layout style={styles.layout}>
+      <Header style={styles.header}>
+        <div style={styles.image}>
+          <Link href="/">
+            <Image
+              src="https://cdn.discordapp.com/attachments/854388429075513344/1184217668841119864/utotech-logo.png?ex=658b2ba5&is=6578b6a5&hm=5c2b6871f1a80cf3125d910cf5fb0d6f884898720dee3aed23f9d8b411987ca6&"
+              width={60}
+              height={60}
+              preview={false}
+            />
+          </Link>
+          <Title style={{ marginLeft: "10px" }}>Utotech</Title>
+        </div>
+        <div>
+          <Link href="/"> Home</Link>
+          <Link href="/about"> About</Link>
+          <Link href="/contact"> Contact</Link>
+          <Link href="/blog"> Blog</Link>
+        </div>
+      </Header>
+
+      <Content>{children}</Content>
+      <Footer style={styles.footer}>
+        <Row justify="start" align="middle">
+          <Col>
+            <Title
+              level={4}
+              style={{
+                color: "white",
+              }}
+            >
+              {companyName}
+            </Title>
+            <Row
+              justify="start"
+              style={{ marginTop: "10px", marginBottom: "10px" }}
+            >
+              <MailOutlined style={styles.icon} />
+              <FacebookOutlined style={styles.icon} />
+              <InstagramOutlined style={styles.icon} />
+            </Row>
+            <Typography style={{ color: "white" }}>{copyright}</Typography>
+          </Col>
+        </Row>
+      </Footer>
+    </Layout>
   );
+};
+
+const styles = {
+  layout: { minHeight: "100vh" } as React.CSSProperties,
+  header: {
+    paddingLeft: "10%",
+    paddingRight: "10%",
+    display: "flex",
+    top: 0,
+    zIndex: 1,
+    height: "100px",
+    position: "sticky",
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "0px 0.5px 0.5px 0px grey",
+  } as React.CSSProperties,
+  content: { overflow: "auto" } as React.CSSProperties,
+  footer: {
+    background: "#106965",
+  } as React.CSSProperties,
+  image: {
+    width: "60px",
+    height: "60px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
+  } as React.CSSProperties,
+  icon: {
+    width: "50px",
+    fontSize: "24px",
+    color: "white",
+    fontWeight: "bold",
+  } as React.CSSProperties,
 };
 
 export default RootLayout;
