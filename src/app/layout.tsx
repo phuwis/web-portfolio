@@ -12,6 +12,7 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { ReactNode } from "react";
+import "../styles/globals.css";
 
 export const metadata = {
   title: "Next.js",
